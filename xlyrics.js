@@ -50,7 +50,7 @@ jsdom.env({
         console.log(lyric);
     }
     else{
-        console.log('No results.');
+        console.log(error('No results.'));
     }
   }
 });
