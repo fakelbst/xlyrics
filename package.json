@@ -1,5 +1,5 @@
 {
-  "name": "fakelbst",
+  "name": "xlyrics",
   "version": "0.0.0",
   "description": "lyric in terminal",
   "main": "index.js",
@@ -12,7 +12,8 @@
   "author": "fakelbst",
   "license": "MIT",
   "devDependencies": {
-    "minimist": "^0.2.0",
-    "jsdom": "*"
+    "chalk": "^0.5.1",
+    "jsdom": "*",
+    "minimist": "^0.2.0"
   }
 }
