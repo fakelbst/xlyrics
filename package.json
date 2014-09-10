@@ -9,11 +9,15 @@
   "keywords": [
     "lyric"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fakelbst/xlyrics"
+  },
   "author": "fakelbst",
-  "license": "MIT",
+  "license": "WTFPL",
   "devDependencies": {
     "chalk": "^0.5.1",
-    "jsdom": "*",
+    "jsdom": "^1.0.0",
     "minimist": "^0.2.0"
   }
 }

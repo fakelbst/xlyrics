@@ -1,57 +1,82 @@
 #!/usr/bin/env node
+var util = require("util");
+var fs = require("fs");
 var jsdom = require("jsdom");
 var request = require("request");
-var parseArgs = require('minimist');
-var chalk = require('chalk');
+var parseArgs = require("minimist");
+var chalk = require("chalk");
+var searchPrompt = require("prompt");
+var jquery = fs.readFileSync("./jquery.min.js", "utf-8");
 
 var error = chalk.bold.red;
 
 var baseUrl = 'http://www.lyricsmania.com/';
+var searchUrl = 'http://www.lyricsmania.com/searchnew.php?k=%s&x=0&y=0'
 var testUrl1 = 'http://www.lyricsmania.com/42_lyrics_coldplays.html';
-var lyrics = '', url = '';
 
-var argv = require('minimist')(process.argv.slice(2));
+var argv = parseArgs(process.argv.slice(2));
 console.dir(argv);
-
-// lyrics = getLyrics(url);
-// if(lyrics !== ''){
-//     console.log(lyrics);
-// }
-// else{
-//     console.log('Not found');
-//     // TODO: search lyric
-// }
 
 var artist = argv['a'] || argv['artist'];
 var title = argv['t'] || argv['title'];
+var search = argv['s'] || argv['search'];
+
 if(artist || title){
     artist = artist.toString(), title = title.toString();
     artist = artist.split(' ').join('_');
     title = title.split(' ').join('_');
-    url = baseUrl + title + '_lyrics_' + artist + '.html';
+    var url = baseUrl + title + '_lyrics_' + artist + '.html';
     console.log(url);
+    getLyrics(url);
 }
 
-jsdom.env({
-  url: url,
-  // url: testUrl1,
-  scripts: ["http://code.jquery.com/jquery.js"],
-  done: function (errors, window) {
-    var $ = window.$;
-    var lyric = $(".lyrics-body").text();
-    if(lyric !== ''){
-        var htmlTitle = $('title').text();
-        console.log(chalk.bold.blue(htmlTitle.replace(' Lyrics', '')));
-        lyric = lyric.replace(/\t/g, '');
-        lyric = lyric.split('\r\n');
-        var first = lyric[0].split('\n');
-        lyric[0] = first.pop();
-        lyric = lyric.join('\n');
-        console.log(lyric);
-    }
-    else{
-        console.log(error('No results.'));
-    }
-  }
-});
+if(search){
+    var s = search.toString();
+    s = s.split(' ').join('+');
+    var url = util.format(searchUrl, s);
+    console.log(url);
+    searchLyrics(url);
+}
+
+function getLyrics(url){
+    jsdom.env({
+        url: url,
+        src: [jquery],
+        done: function (errors, window) {
+            var $ = window.$;
+            var lyric = $(".lyrics-body").text();
+            if(lyric !== ''){
+                var htmlTitle = $('title').text();
+                console.log(chalk.bold.blue(htmlTitle.replace(' Lyrics', '')));
+                lyric = lyric.replace(/\t/g, '');
+                lyric = lyric.split('\r\n');
+                var first = lyric[0].split('\n');
+                lyric[0] = first.pop();
+                lyric = lyric.join('\n');
+                console.log(lyric);
+            }
+            else{
+                console.log(error('No results.'));
+            }
+        }
+    });
+}
+
+function searchLyrics(url){
+    jsdom.env({
+        url: url,
+        src: [jquery],
+        done: function (errors, window) {
+            var $ = window.$;
+            var lyrics = $(".elenco .col-left ul");
+            if($(lyrics).has('li').length !== 0){
+                // $(".elenco .col-left ul li");
+                console.log( $(".elenco .col-left ul li").text());
+            }
+            else{
+                console.log(error('No results.'));
+            }
+        }
+    });
+}
 
