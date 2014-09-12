@@ -15,7 +15,6 @@ var searchUrl = 'http://www.lyricsmania.com/searchnew.php?k=%s&x=0&y=0'
 var testUrl1 = 'http://www.lyricsmania.com/42_lyrics_coldplays.html';
 
 var argv = parseArgs(process.argv.slice(2));
-console.dir(argv);
 
 var artist = argv['a'] || argv['artist'];
 var title = argv['t'] || argv['title'];
@@ -26,7 +25,6 @@ if(artist || title){
     artist = artist.split(' ').join('_');
     title = title.split(' ').join('_');
     var url = baseUrl + '/' + title + '_lyrics_' + artist + '.html';
-    console.log(url);
     getLyrics(url);
 }
 
@@ -47,11 +45,11 @@ function getLyrics(url){
             var lyric = $(".lyrics-body").text();
             if(lyric !== ''){
                 var htmlTitle = $('title').text();
-                console.log(chalk.bold.blue(htmlTitle.replace(' Lyrics', '')));
+                console.log(chalk.bold.blue(htmlTitle.replace(' Lyrics', '')), '\n');
                 lyric = lyric.replace(/\t/g, '');
                 lyric = lyric.split('\r\n');
-                var first = lyric[0].split('\n');
-                lyric[0] = first.pop();
+                lyric = lyric[0].split('\n');
+                lyric = lyric.slice(7);
                 lyric = lyric.join('\n');
                 console.log(lyric);
             }
@@ -77,7 +75,6 @@ function searchLyrics(url){
                 searchPrompt.start();
                 searchPrompt.get([{
                     name: 'index',
-                    required: true,
                     description: 'Select the lyric'
                 }],  function (err, result) {
                     var selected = result.index;
