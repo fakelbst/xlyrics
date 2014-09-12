@@ -10,7 +10,7 @@ var jquery = fs.readFileSync("./jquery.min.js", "utf-8");
 
 var error = chalk.bold.red;
 
-var baseUrl = 'http://www.lyricsmania.com/';
+var baseUrl = 'http://www.lyricsmania.com';
 var searchUrl = 'http://www.lyricsmania.com/searchnew.php?k=%s&x=0&y=0'
 var testUrl1 = 'http://www.lyricsmania.com/42_lyrics_coldplays.html';
 
@@ -25,7 +25,7 @@ if(artist || title){
     artist = artist.toString(), title = title.toString();
     artist = artist.split(' ').join('_');
     title = title.split(' ').join('_');
-    var url = baseUrl + title + '_lyrics_' + artist + '.html';
+    var url = baseUrl + '/' + title + '_lyrics_' + artist + '.html';
     console.log(url);
     getLyrics(url);
 }
@@ -70,8 +70,22 @@ function searchLyrics(url){
             var $ = window.$;
             var lyrics = $(".elenco .col-left ul");
             if($(lyrics).has('li').length !== 0){
-                // $(".elenco .col-left ul li");
-                console.log( $(".elenco .col-left ul li").text());
+                console.log(chalk.bold.blue('Search Result:'));
+                $(".elenco .col-left ul li").each(function(index) {
+                    console.log(chalk.bold.magenta(index+1) + ": " + $( this).text() );
+                });
+                searchPrompt.start();
+                searchPrompt.get([{
+                    name: 'index',
+                    required: true,
+                    description: 'Select the lyric'
+                }],  function (err, result) {
+                    var selected = result.index;
+                    var aurl = $(".elenco .col-left ul li").eq(selected-1);
+                    var url = $(aurl).children('a').attr('href');
+                    url = baseUrl + url;
+                    getLyrics(url);
+                });
             }
             else{
                 console.log(error('No results.'));
