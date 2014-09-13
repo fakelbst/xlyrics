@@ -1,0 +1,6 @@
+Usage:
+     -V, --version        output the version number
+     -a, --artist         enter the artist
+     -t, --title          enter the song's title
+     -h, --help           output usage information
+     -s, --search         search by artist, title

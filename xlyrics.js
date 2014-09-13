@@ -19,6 +19,12 @@ var argv = parseArgs(process.argv.slice(2));
 var artist = argv['a'] || argv['artist'];
 var title = argv['t'] || argv['title'];
 var search = argv['s'] || argv['search'];
+var help = argv['h'] || argv['help'];
+
+if(help){
+    getUsage(0);
+    return;
+}
 
 if(artist || title){
     artist = artist.toString(), title = title.toString();
@@ -26,6 +32,7 @@ if(artist || title){
     title = title.split(' ').join('_');
     var url = baseUrl + '/' + title + '_lyrics_' + artist + '.html';
     getLyrics(url);
+    return;
 }
 
 if(search){
@@ -34,6 +41,7 @@ if(search){
     var url = util.format(searchUrl, s);
     console.log(url);
     searchLyrics(url);
+    return;
 }
 
 function getLyrics(url){
@@ -89,5 +97,10 @@ function searchLyrics(url){
             }
         }
     });
+}
+
+function getUsage() {
+  var file = fs.createReadStream(__dirname + '/help.txt')
+  file.pipe(process.stdout)
 }
 
