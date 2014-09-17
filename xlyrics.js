@@ -6,7 +6,7 @@ var jsdom = require("jsdom");
 var parseArgs = require("minimist");
 var chalk = require("chalk");
 var searchPrompt = require("prompt");
-var jquery = fs.readFileSync("./jquery.min.js", "utf-8");
+var jquery = fs.readFileSync(__dirname + "/jquery.min.js", "utf-8");
 
 var error = chalk.bold.red;
 
