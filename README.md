@@ -19,10 +19,10 @@ Usage:
 
 Example:
 ---------
-Get the lyric by the artist and song name:
+Get the lyric by the **artist** and **song title**:
 
     $ xlyrics -a "radiohead" -t "black star"
-    **Radiohead - Black Sta**
+    Radiohead - Black Star
 
     i get home from work and
     you're still standing in your dressing
@@ -33,7 +33,7 @@ Get the lyric by the artist and song name:
 Or search lyrics:
 
     $ xlyrics -s "arcade fire neighborhood"
-    **Search Result:**
+    Search Result:
     1: Arcade Fire - Neighborhood #1 (Tunnels)
     2: Arcade Fire - Neighborhood #2 (Laika)
     3: Arcade Fire - Neighborhood #3 (Power Out)
@@ -44,10 +44,10 @@ Or search lyrics:
     ...
     prompt: Select the lyric:
 
-Then you can enter the index of the results to get lyric.
+Then you can enter the **index** of the results to get lyric.
 
     prompt: Select the lyric:  1
-    **Arcade Fire - Neighborhood #1 (Tunnels)**
+    Arcade Fire - Neighborhood #1 (Tunnels)
 
     And if the snow buries my,
     my neighborhood.
