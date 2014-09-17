@@ -1,12 +1,14 @@
 {
   "name": "xlyrics",
-  "version": "0.5.1",
-  "description": "lyric in terminal",
+  "version": "0.5.2",
   "bin": "./xlyrics.js",
+  "description": "get lyrics in terminal",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+    "lyrics",
     "lyric",
     "music"
   ],

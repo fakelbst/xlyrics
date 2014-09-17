@@ -39,7 +39,6 @@ if(search){
     var s = search.toString();
     s = s.split(' ').join('+');
     var url = util.format(searchUrl, s);
-    console.log(url);
     searchLyrics(url);
     return;
 }

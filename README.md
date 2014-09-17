@@ -1,3 +1,7 @@
+xlyrics
+=========
+
+[![NPM](https://nodei.co/npm/xlyrics.png)](https://nodei.co/npm/xlyrics/)
 
 Check lyrics in terminal.
 All lyrics from [http://www.lyricsmania.com/](http://www.lyricsmania.com/).
