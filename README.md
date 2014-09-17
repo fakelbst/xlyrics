@@ -9,7 +9,6 @@ Usage:
      -t, --title          enter the song's title
      -s, --search         search by artist, title
      -h, --help           output usage information
-     -V, --version        output the version number
 
 license:
 --------
