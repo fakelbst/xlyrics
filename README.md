@@ -1,7 +1,10 @@
 
-
 Check lyrics in terminal.
 All lyrics from [http://www.lyricsmania.com/](http://www.lyricsmania.com/).
+
+Install:
+--------
+    npm install -g xlyrics
 
 Usage:
 --------
@@ -10,6 +13,6 @@ Usage:
      -s, --search         search by artist, title
      -h, --help           output usage information
 
-license:
+License:
 --------
 [WTFPL](http://www.wtfpl.net/)
