@@ -2,7 +2,6 @@
 var util = require("util");
 var fs = require("fs");
 var jsdom = require("jsdom");
-var request = require("request");
 var parseArgs = require("minimist");
 var chalk = require("chalk");
 var searchPrompt = require("prompt");
@@ -21,8 +20,8 @@ var title = argv['t'] || argv['title'];
 var search = argv['s'] || argv['search'];
 var help = argv['h'] || argv['help'];
 
-if(help){
-    getUsage(0);
+if(help || Object.getOwnPropertyNames(argv).length === 1){
+    getUsage();
     return;
 }
 
