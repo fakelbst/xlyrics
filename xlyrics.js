@@ -26,12 +26,32 @@ if(help || Object.getOwnPropertyNames(argv).length === 1){
     return;
 }
 
-if(artist || title){
+if(artist && title){
     artist = artist.toString(), title = title.toString();
     artist = artist.split(' ').join('_');
     title = title.split(' ').join('_');
     var url = baseUrl + '/' + title + '_lyrics_' + artist + '.html';
     getLyrics(url);
+    return;
+}
+
+// only artist: go to the artist page
+// if(artist && title===undefined){
+//     artist = artist.split(' ').join('_');
+//     var url = baseUrl + '/' + artist + '_lyrics.html';
+//     console.log(url);
+//     getArtistPage(url);
+//     return;
+// }
+
+// only title: search this title
+if((artist && title===undefined) || (title && artist===undefined)){
+    var s = '';
+    if(artist) s = artist.toString();
+    if(title) s = title.toString();
+    s = s.split(' ').join('+');
+    var url = util.format(searchUrl, s);
+    searchLyrics(url);
     return;
 }
 
@@ -94,6 +114,17 @@ function searchLyrics(url){
             else{
                 console.log(error('No results.'));
             }
+        }
+    });
+}
+
+function getArtistPage(url) {
+    jsdom.env({
+        url: url,
+        src: [jquery],
+        done: function (errors, window) {
+            var $ = window.$;
+            var lyrics = $(".discography");// TODO:
         }
     });
 }
