@@ -74,6 +74,7 @@ function getLyrics(url){
                 var htmlTitle = $('title').text();
                 console.log(chalk.bold.blue(htmlTitle.replace(' Lyrics', '')), '\n');
                 lyric = lyric.replace(/\t/g, '');
+                lyric = lyric.replace('try { _402_Show(); } catch(e) {}', '');
                 lyric = lyric.split('\r\n');
                 lyric = lyric[0].split('\n');
                 lyric = lyric.slice(7);
