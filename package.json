@@ -1,6 +1,6 @@
 {
   "name": "xlyrics",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "bin": "./xlyrics.js",
   "description": "get lyrics in terminal",
   "main": "index.js",

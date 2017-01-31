@@ -78,6 +78,7 @@ function getLyrics(url){
                 lyric = lyric.split('\r\n');
                 lyric = lyric[0].split('\n');
                 lyric = lyric.slice(7);
+                lyric.splice(-7,7);
                 lyric = lyric.join('\n');
                 console.log(lyric);
             }
